@@ -2,6 +2,16 @@
 
 from random import randint
 
+def checkUser(user):
+    is_clone = False
+    if len(users) > 0:
+        for u in users:
+            if u.lower() == user.lower():
+                is_clone = True
+                break
+
+    return is_clone
+
 def start_game():
     RN = randint(1,10)
     n = 0
@@ -29,6 +39,8 @@ def start_game():
     return n
 
 punteggi = []
+users = []
+
 
 while True:
 

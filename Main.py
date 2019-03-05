@@ -27,14 +27,16 @@ def start_game(RN):
 punteggi = []
 
 while True:
-    RANDOM_NUMBER = randint(1, 10)
-    print(RANDOM_NUMBER)
-    n = start_game(RANDOM_NUMBER)
+
+    n = start_game(randint(1, 10))
     punteggi.append(n)
     print("Il miglior punteggio è stato fatto in {} tentativi".format(min(punteggi)))
-    confirm = str(input("Vuoi continuare? y/n "))
-    if confirm == "y".capitalize():
-        nuovo_random_number = randint(1, 10)
+    confirm = input("Vuoi continuare? y/n ")
+    if confirm == "y":
+        continue
+    elif confirm == "n":
+        break
+
 
 
 

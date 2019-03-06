@@ -39,24 +39,24 @@ def start_game():
     while n > -1:
         n += 1
         try:
-            number = int(input("Scegli un numero tra 1 e 10: "))
+            number = int(input("Choose a number from 1 to 10: "))
             if number < 1 or number > 10:
                 raise ValueError
         except:
-            print("Dovresti scegliere un numero tra 1 e 10")
+            print("You should choose a number from 1 to 10")
             print()
             n -= 1
             continue
 
 
         if number > RN:
-            print("Il numero è più basso.")
+            print("ADVICE: the random number is lower.")
             continue
         elif number < RN:
-            print("Il numero è più alto.")
+            print("ADVICE: the random number is higher.")
             continue
         elif number == RN:
-            print("Bravo! Hai azzeccato al tentativo {}".format(n))
+            print("Good ! you caught the correct number at attempt number {}".format(n))
             print()
             break
     return n
@@ -67,8 +67,14 @@ users_more_rank = []
 
 
 while True:
+    try:
+        username = input("What's your username? ")
+        if len(username) < 3:
+            raise ValueError
+    except ValueError:
+        print("Please, username must have at least 3 characters!")
+        continue
 
-    username = input("What's your username? ")
     username = username.capitalize()
     if username in users:
         print()
@@ -78,6 +84,11 @@ while True:
         users.append([])
         print()
         print("Welcome to HIGH-LOW Game {}!".format(username))
+        print("""
+        To be the WINNER at this game, you must guess the invisible Random Number 
+        with fewer attempts! 
+        If you exit from the game, all rankings will be delete!
+        """)
     n = start_game()
     index_user = users.index(username)
     punteggi.append(n)
@@ -90,25 +101,25 @@ while True:
         for user in best_ranking:
             usernames.append(user[0])
         print("==========BEST RANKING===========")
-        print("Questi utenti hanno ottenuto lo stesso punteggio di {}".format(rank))
+        print("These users are winning with the same score: {} attempts".format(rank))
         for u in usernames:
             print(u)
         print("=================================")
     else:
         print("==========BEST RANKING===========")
-        print("{} ha ottenuto il miglior punteggio: {}".format(best_ranking[0][0],best_ranking[0][1]))
+        print("{} is winning with a score of: {} attempts".format(best_ranking[0][0],best_ranking[0][1]))
         print("=================================")
 
     confirm = ""
 
     while (confirm != "n" and confirm != "y"):
        try:
-          confirm = input("Vuoi continuare? y/n ")
+          confirm = input("Do you want to continue playing? y/n ")
           confirm = confirm.lower()
           if confirm != "y" and confirm != "n":
               raise ValueError
        except:
-           print("Dovresti inserire Y se vuoi continuare o N se vuoi abbandonare.")
+           print("You should write 'Y' if you want continue or 'N' if you want stop the game.")
            print()
        continue
 

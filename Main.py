@@ -62,12 +62,12 @@ def start_game():
 punteggi = []
 users = []
 users_more_rank = []
-best_ranking = []
 
 
 while True:
 
     username = input("What's your username? ")
+    username = username.capitalize()
     if username in users:
         print("Nice to see you again {}!".format(username))
     else:
@@ -78,25 +78,38 @@ while True:
     index_user = users.index(username)
     punteggi.append(n)
     users[index_user + 1].append(n)
-    print(check_best_rank(users))
+    best_ranking = check_best_rank(users)
 
-    print(users)
-    print("Il miglior punteggio è stato fatto in {} tentativi".format(min(punteggi)))
+    if len(best_ranking) > 1:
+        usernames = []
+        rank = best_ranking[0][1]
+        for user in best_ranking:
+            usernames.append(user[0])
+        print("==================================")
+        print("Questi utenti hanno ottenuto lo stesso punteggio di {}".format(rank))
+        for u in usernames:
+            print(u)
+        print("==================================")
+    else:
+        print("==================================")
+        print("{} ha ottenuto il miglior punteggio: {}".format(best_ranking[0][0],best_ranking[0][1]))
+        print("==================================")
+
     confirm = ""
-    confirmationY = confirm.capitalize() != "Y"
-    confirmationN = confirm.capitalize() != "N"
-    while (confirm.capitalize() != "N" and confirm.capitalize() != "Y"):
+
+    while (confirm != "n" and confirm != "y"):
        try:
           confirm = input("Vuoi continuare? y/n ")
-          if confirm.capitalize() != "Y" and confirm.capitalize() != "N":
+          confirm = confirm.lower()
+          if confirm != "y" and confirm != "n":
               raise ValueError
        except:
            print("Dovresti inserire Y se vuoi continuare o N se vuoi abbandonare.")
        continue
 
-    if confirm.capitalize() == "Y":
+    if confirm == "y":
         continue
-    elif confirm.capitalize() == "N":
+    elif confirm == "n":
         break
 
 

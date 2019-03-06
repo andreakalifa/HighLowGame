@@ -44,6 +44,7 @@ def start_game():
                 raise ValueError
         except:
             print("Dovresti scegliere un numero tra 1 e 10")
+            print()
             n -= 1
             continue
 
@@ -56,6 +57,7 @@ def start_game():
             continue
         elif number == RN:
             print("Bravo! Hai azzeccato al tentativo {}".format(n))
+            print()
             break
     return n
 
@@ -69,10 +71,12 @@ while True:
     username = input("What's your username? ")
     username = username.capitalize()
     if username in users:
+        print()
         print("Nice to see you again {}!".format(username))
     else:
         users.append(username)
         users.append([])
+        print()
         print("Welcome to HIGH-LOW Game {}!".format(username))
     n = start_game()
     index_user = users.index(username)
@@ -85,15 +89,15 @@ while True:
         rank = best_ranking[0][1]
         for user in best_ranking:
             usernames.append(user[0])
-        print("==================================")
+        print("==========BEST RANKING===========")
         print("Questi utenti hanno ottenuto lo stesso punteggio di {}".format(rank))
         for u in usernames:
             print(u)
-        print("==================================")
+        print("=================================")
     else:
-        print("==================================")
+        print("==========BEST RANKING===========")
         print("{} ha ottenuto il miglior punteggio: {}".format(best_ranking[0][0],best_ranking[0][1]))
-        print("==================================")
+        print("=================================")
 
     confirm = ""
 
@@ -105,6 +109,7 @@ while True:
               raise ValueError
        except:
            print("Dovresti inserire Y se vuoi continuare o N se vuoi abbandonare.")
+           print()
        continue
 
     if confirm == "y":

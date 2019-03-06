@@ -2,6 +2,27 @@
 
 from random import randint
 
+def check_best_rank(users_more_rank):
+    best_rank_for_player = []
+    best_player = []
+    for element in users_more_rank:
+        if type(element) != list:
+            rank_index = users_more_rank.index(element) + 1
+            best_rank_for_player.append([element] + [min(users_more_rank[rank_index])])
+
+    lower = 1000
+
+    for element in best_rank_for_player:
+        if element[1] < lower:
+            lower = element[1]
+
+    for element in best_rank_for_player:
+        if element[1] == lower:
+            best_player.append(element)
+
+    return best_player
+
+
 def checkUser(user):
     is_clone = False
     if len(users) > 0:
@@ -40,12 +61,26 @@ def start_game():
 
 punteggi = []
 users = []
+users_more_rank = []
+best_ranking = []
 
 
 while True:
 
+    username = input("What's your username? ")
+    if username in users:
+        print("Nice to see you again {}!".format(username))
+    else:
+        users.append(username)
+        users.append([])
+        print("Welcome to HIGH-LOW Game {}!".format(username))
     n = start_game()
+    index_user = users.index(username)
     punteggi.append(n)
+    users[index_user + 1].append(n)
+    print(check_best_rank(users))
+
+    print(users)
     print("Il miglior punteggio è stato fatto in {} tentativi".format(min(punteggi)))
     confirm = ""
     confirmationY = confirm.capitalize() != "Y"
